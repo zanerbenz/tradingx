@@ -3,10 +3,8 @@
 import ccxt
 import pandas as pd
 pd.set_option('display.max_rows', None)
-import pandas as pd
 import mplfinance as mpf
 mpf.__version__
-
 import numpy as np
 from datetime import datetime
 
@@ -16,7 +14,6 @@ df = pd.DataFrame(bars, columns=['timestamp', 'open', 'high', 'low', 'close', 'v
 df.index = pd.DatetimeIndex(df['timestamp'])
 print(df)
 
-
 #calculate the rolling standard deviation using the hourly close price of ETHBTC going back 20 periods and assign it to a variable
 #calculate a 20 period simple moving average of the hourly close price of ETHBTC and assign it to a variable
 #made a variable equal to the close price of the time interval that you choose
@@ -25,7 +22,7 @@ df['stddev'] = df.close.rolling(window=20).std()
 df['sma'] = df.close.rolling(window=20).mean()
 df['close'] = df.close
 
-tpa = { 'BTC' : 0.5, 'ETH' : 0.5, }
+tpa = { 'BTC' : 0.5, 'ETH' : 0.5 }
 
 tpa['BTC'] = ((df.close - df.sma) / df.stddev + 4) / 8
 tpa['ETH'] = ((df.sma - df.close) / df.stddev + 4) / 8
